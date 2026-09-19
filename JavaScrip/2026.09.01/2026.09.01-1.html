@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Function 練習</title>
+</head>
+<body>
+    <script>
+        // function sayHello(){
+        //     console.log("hello, world!");
+        // }
+
+        const sayHello = () =>{
+            console.log("Hello,world!");
+        }
+       
+        sayHello();
+        sayHello();
+        sayHello();
+        sayHello();
+         
+
+        const user= {
+            name:"john",
+            age:30,
+        }
+        console.log(user.name);//John
+        console.log(user.age);//30
+
+        const{name,age} =user;
+        console.log(user.name);//John
+        console.log(user.age);//30
+
+
+        console.log("哈囉,"+name+",你今年"+age+"歲。");   
+
+        console.log(`哈囉,${name},你今年${age}歲。`);
+
+
+        function celsiusToFahrenheit(location = "台中",=25){
+            return `${location}的攝氏溫度 ${celsius}c 轉換為華氏溫度為:${(celsius *1.8+32)}f;
+        }
+
+    </script>
+</body>
+</html>

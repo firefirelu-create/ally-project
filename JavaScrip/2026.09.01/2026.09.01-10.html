@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入表單</title>
+
+    <style>
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .message.error {
+            color: red;
+        }
+
+        .message.success {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="login-form">
+
+        <label>
+            使用者名稱：
+            <input type="text" name="username">
+        </label>
+
+        <br><br>
+
+        <label>
+            密碼：
+            <input type="password" name="password">
+        </label>
+
+        <br><br>
+
+        <button type="submit">登入</button>
+
+        <!-- 動態顯示通知 -->
+        <div id="message" class="message"></div>
+
+    </form>
+
+    <script>
+        // 取得表單
+        const loginForm = document.querySelector("#login-form");
+
+        // 取得通知區域
+        const message = document.querySelector("#message");
+
+        // 監聽表單 submit
+        loginForm.addEventListener("submit", function (event) {
+
+            // 阻止表單送出後重新整理頁面
+            event.preventDefault();
+
+            // 取得帳號
+            const username = loginForm
+                .querySelector('input[name="username"]')
+                .value
+                .trim();
+
+            // 取得密碼
+            const password = loginForm
+                .querySelector('input[name="password"]')
+                .value;
+
+            // 清除之前的訊息
+            message.textContent = "";
+            message.className = "message";
+
+            // 檢查帳號
+            if (username === "") {
+                message.textContent = "⚠️ 請輸入使用者名稱！";
+                message.classList.add("error");
+                return;
+            }
+
+            // 檢查密碼長度
+            if (password.length <= 6) {
+                message.textContent = "⚠️ 密碼必須大於 6 位數！";
+                message.classList.add("error");
+                return;
+            }
+
+            // 驗證成功
+            message.textContent = "✅ 登入成功！歡迎回來，" + username + "！";
+            message.classList.add("success");
+
+            // Console 顯示登入成功資訊
+            console.log("登入成功！");
+            console.log("使用者名稱：", username);
+        });
+    </script>
+
+</body>
+
+</html>

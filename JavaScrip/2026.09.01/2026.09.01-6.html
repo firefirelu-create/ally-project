@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        let score = prompt("請輪入學生分數值0~100)");
+
+        if (!/^\d+$/.test(score)){
+            console.log("輸入錯誤:請輸入 0~100 的阿拉伯數字");
+        } else {
+        score = Number(score);
+
+        if (score < 0 || score > 100) {
+            console.log("輸入錯誤:請輸入 0~100 的阿拉伯數字");
+        } else if (score>=90){
+            console.log("優等");
+        }else if (score>=80){
+            console.log("甲等");
+        }else if (score>=70){
+            console.log("乙等");
+        }else {
+            console.log("需再加油");
+        }
+
+        }
+    </script>
+    
+</body>
+</html>

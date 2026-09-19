@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function calculateFinalPrice(amount, isVip, useSpecialCard) {
+    // 金額無效，直接返回
+    if (amount <= 0) {
+        return 0;
+    }
+
+    // 1. 滿 3000 折 300
+    if (amount >= 3000) {
+        amount -= 300;
+    }
+
+    // 2. VIP 再享 95 折
+    if (isVip) {
+        amount *= 0.95;
+    }
+
+    // 3. 特定信用卡再折 50
+    if (useSpecialCard) {
+        amount -= 50;
+    }
+
+    return amount;
+}
+
+// 測試
+const finalPrice = calculateFinalPrice(3500, true, true);
+
+console.log(`最後應付金額：${finalPrice} 元`);
+
+    </script>
+    
+</body>
+</html>

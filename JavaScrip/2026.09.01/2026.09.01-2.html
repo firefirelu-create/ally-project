@@ -1,0 +1,499 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>const / let / var 比較</title>
+
+    <style>
+        :root {
+            --dark-bg: #111827;
+            --brand-color: #6eada5;
+            --light-bg: #f9fafb;
+            --card-bg: #ffffff;
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            background: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* CSS:HEADER-START */
+        header {
+            background: var(--dark-bg);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 5px;
+        }
+
+        header p {
+            margin: 0;
+            color: #d1d5db;
+        }
+        /* CSS:HEADER-END */
+
+        /* CSS:MAIN-START */
+        main {
+            width: min(1100px, 92%);
+            margin: 40px auto;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .intro h2 {
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            color: var(--text-muted);
+        }
+
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid var(--brand-color);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        .card code {
+            background: #f3f4f6;
+            padding: 3px 7px;
+            border-radius: 5px;
+        }
+
+        .card ul {
+            padding-left: 20px;
+        }
+
+        .good {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .warning {
+            color: var(--warning);
+            font-weight: bold;
+        }
+
+        .danger {
+            color: var(--danger);
+            font-weight: bold;
+        }
+
+        /* CSS:DEMO-START */
+        .demo {
+            margin-top: 40px;
+            background: var(--dark-bg);
+            color: white;
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .demo h2 {
+            margin-top: 0;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        button {
+            border: 0;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .result {
+            background: #000000;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 120px;
+            white-space: pre-wrap;
+            font-family: Consolas, monospace;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+        }
+
+        th,
+        td {
+            padding: 14px;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        th {
+            background: var(--dark-bg);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .compare-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+        /* CSS:DEMO-END */
+    </style>
+</head>
+
+<body>
+
+    <!-- SECTION:HEADER-START -->
+    <header>
+        <h1>JavaScript 變數比較</h1>
+        <p>const / let / var 到底有什麼不同？</p>
+    </header>
+    <!-- SECTION:HEADER-END -->
+
+    <main>
+
+        <!-- SECTION:INTRO-START -->
+        <section class="intro">
+            <h2>三種宣告方式一次搞懂</h2>
+            <p>
+                現代 JavaScript 開發通常優先使用
+                <code>const</code>，需要重新賦值時使用
+                <code>let</code>。
+            </p>
+        </section>
+        <!-- SECTION:INTRO-END -->
+
+
+        <!-- SECTION:COMPARE-START -->
+        <section class="compare-grid">
+
+            <article class="card">
+                <h3>const</h3>
+
+                <p><strong>特點：</strong></p>
+
+                <ul>
+                    <li>區塊作用域 Block Scope</li>
+                    <li>宣告時必須初始化</li>
+                    <li>不能重新賦值</li>
+                    <li>不能在同一作用域重複宣告</li>
+                </ul>
+
+                <p class="good">✓ 現代 JavaScript 優先使用</p>
+
+                <pre><code>const name = "小明";
+name = "小華"; // ❌ 錯誤</code></pre>
+            </article>
+
+
+            <article class="card">
+                <h3>let</h3>
+
+                <p><strong>特點：</strong></p>
+
+                <ul>
+                    <li>區塊作用域 Block Scope</li>
+                    <li>可以重新賦值</li>
+                    <li>不能在同一作用域重複宣告</li>
+                    <li>宣告前不能使用</li>
+                </ul>
+
+                <p class="good">✓ 適合會改變的資料</p>
+
+                <pre><code>let score = 80;
+score = 90; // ✓ 可以</code></pre>
+            </article>
+
+
+            <article class="card">
+                <h3>var</h3>
+
+                <p><strong>特點：</strong></p>
+
+                <ul>
+                    <li>函式作用域 Function Scope</li>
+                    <li>可以重新賦值</li>
+                    <li>可以重複宣告</li>
+                    <li>存在 Hoisting 行為</li>
+                </ul>
+
+                <p class="warning">⚠ 現代程式通常不建議使用</p>
+
+                <pre><code>var age = 20;
+var age = 30; // ✓ 可以</code></pre>
+            </article>
+
+        </section>
+        <!-- SECTION:COMPARE-END -->
+
+
+        <!-- SECTION:DEMO-START -->
+        <section class="demo">
+
+            <h2>🧪 互動測試</h2>
+
+            <p>
+                點擊按鈕，觀察三種宣告方式的結果。
+            </p>
+
+            <div class="button-group">
+                <button data-action="const">測試 const</button>
+                <button data-action="let">測試 let</button>
+                <button data-action="var">測試 var</button>
+                <button data-action="scope">測試作用域</button>
+                <button data-action="clear">清除結果</button>
+            </div>
+
+            <div class="result" id="result">等待測試...</div>
+
+        </section>
+        <!-- SECTION:DEMO-END -->
+
+
+        <!-- SECTION:TABLE-START -->
+        <section class="table-wrapper">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>比較項目</th>
+                        <th>const</th>
+                        <th>let</th>
+                        <th>var</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>區塊作用域</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                    </tr>
+
+                    <tr>
+                        <td>可以重新賦值</td>
+                        <td>✗</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+
+                    <tr>
+                        <td>可以重複宣告</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                        <td>✓</td>
+                    </tr>
+
+                    <tr>
+                        <td>宣告時必須初始化</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+
+                    <tr>
+                        <td>推薦程度</td>
+                        <td>★★★★★</td>
+                        <td>★★★★★</td>
+                        <td>★</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+        <!-- SECTION:TABLE-END -->
+
+    </main>
+
+
+    <footer>
+        const / let / var JavaScript 基礎教學
+    </footer>
+
+
+    <script>
+        /* JS:DEMO-START */
+
+        const result = document.querySelector(".result");
+        const buttons = document.querySelectorAll("button");
+
+        buttons.forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                const action = button.dataset.action;
+
+                if (action === "const") {
+
+                    let output = "";
+
+                    output += "const 測試\n";
+                    output += "--------------------\n";
+
+                    const name = "小明";
+
+                    output += "const name = '小明';\n";
+                    output += "目前 name = " + name + "\n\n";
+
+                    output += "如果執行：\n";
+                    output += "name = '小華';\n\n";
+
+                    output += "結果：❌ TypeError\n";
+                    output += "const 宣告的變數不能重新賦值。";
+
+                    result.textContent = output;
+
+                } else if (action === "let") {
+
+                    let score = 80;
+
+                    let output = "";
+
+                    output += "let 測試\n";
+                    output += "--------------------\n";
+
+                    output += "let score = 80;\n";
+                    output += "原本 score = " + score + "\n\n";
+
+                    score = 95;
+
+                    output += "score = 95;\n";
+                    output += "現在 score = " + score + "\n\n";
+
+                    output += "結果：✓ 成功\n";
+                    output += "let 可以重新賦值。";
+
+                    result.textContent = output;
+
+                } else if (action === "var") {
+
+                    var age = 20;
+
+                    let output = "";
+
+                    output += "var 測試\n";
+                    output += "--------------------\n";
+
+                    output += "var age = 20;\n";
+                    output += "age = " + age + "\n\n";
+
+                    var age = 30;
+
+                    output += "var age = 30;\n";
+                    output += "現在 age = " + age + "\n\n";
+
+                    output += "結果：✓ 成功\n";
+                    output += "var 可以重複宣告。";
+
+                    result.textContent = output;
+
+                } else if (action === "scope") {
+
+                    let output = "";
+
+                    output += "作用域測試\n";
+                    output += "--------------------\n\n";
+
+                    output += "if (true) {\n";
+                    output += "    let a = 10;\n";
+                    output += "    const b = 20;\n";
+                    output += "    var c = 30;\n";
+                    output += "}\n\n";
+
+                    output += "let a：區塊外無法使用 ❌\n";
+                    output += "const b：區塊外無法使用 ❌\n";
+                    output += "var c：區塊外仍然存在 ✓\n\n";
+
+                    output += "重點：\n";
+                    output += "let / const → Block Scope\n";
+                    output += "var → Function Scope";
+
+                    result.textContent = output;
+
+                } else if (action === "clear") {
+
+                    result.textContent = "等待測試...";
+
+                }
+
+            });
+
+        });
+
+        /* JS:DEMO-END */
+
+
+
+
+
+
+
+
+
+
+        
+    </script>
+
+</body>
+</html>
+```
