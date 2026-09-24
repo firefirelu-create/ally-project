@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Iansui&display=swap');
+
+/* =========================
+           全域變數與設定
+        ========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.8;
+    color: var(--text);
+    background: var(--cream);
+
+    justify-content: center;
+
+}
+
+:root {
+    --dark-green: #24382a;
+    --forest-green: #3f5f45;
+    --light-green: #dfe8dc;
+    --cream: #f5f1e8;
+    --brown: #80684f;
+    --text: #354239;
+    --white: #ffffff;
+    --pink:#f5abab;
+    --blue:rgb(3, 102, 102);
+    --bg-body: cadetblue ;
+    --bg-logo: burlywood;
+    --bg-nav: rgb(19,80,134);
+    --font-body: #0ba38f;
+     --bg-yellow:#FEF9D7;
+}
+
+
+.fw-100 {
+    font-weight: 100;
+
+}
+
+.fw-200 {
+    font-weight: 200;
+
+}
+
+.fw-300 {
+    font-weight: 300;
+
+}
+
+.fw-400 {
+    font-weight: 400;
+
+}
+
+.fw-500 {
+    font-weight: 500;
+
+}
+
+.fw-600 {
+    font-weight: 600;
+
+}
+
+.fw-700 {
+    font-weight: 700;
+
+}
+
+.fw-800 {
+    font-weight: 800;
+
+}
+
+.fw-900 {
+    font-weight: 900;
+
+}

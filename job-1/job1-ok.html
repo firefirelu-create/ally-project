@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>仙途登山錄｜凡人修仙傳</title>
+
+
+    <style>
+
+        /* ==================================================
+           CSS：全域變數
+           ================================================== */
+
+        :root {
+
+            --immortal-blue: #183b5b;
+            --deep-blue: #0c263d;
+            --mountain-green: #355c4a;
+            --jade-green: #6f9d83;
+
+            --gold: #d9b45b;
+            --light-gold: #f2d98b;
+
+            --paper: #f5efdf;
+            --paper-dark: #e6dcc4;
+
+            --ink: #27352e;
+            --white: #ffffff;
+
+            --danger: #a84242;
+            --danger-light: #d96b6b;
+
+            --shadow:
+                0 15px 40px rgba(10, 30, 45, 0.25);
+
+        }
+
+
+        /* ==================================================
+           CSS：基本設定
+           ================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                "Microsoft JhengHei",
+                "Noto Serif TC",
+                serif;
+
+            color: var(--ink);
+
+            background:
+
+                linear-gradient(
+                    rgba(12, 38, 61, 0.78),
+                    rgba(12, 38, 61, 0.78)
+                ),
+
+                url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2000&q=80")
+                center / cover fixed;
+
+        }
+
+
+        /* ==================================================
+           CSS：仙氣雲霧
+           ================================================== */
+
+        .mist {
+
+            position: fixed;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            filter: blur(35px);
+
+            opacity: 0.25;
+
+            z-index: 0;
+
+            animation:
+                mistFloat 8s ease-in-out infinite;
+
+        }
+
+
+        .mist-one {
+
+            width: 300px;
+            height: 120px;
+
+            left: 5%;
+            top: 15%;
+
+            background: #dceee6;
+
+        }
+
+
+        .mist-two {
+
+            width: 350px;
+            height: 140px;
+
+            right: 5%;
+            top: 55%;
+
+            background: #e6d8ae;
+
+            animation-delay: 2s;
+
+        }
+
+
+        .mist-three {
+
+            width: 280px;
+            height: 110px;
+
+            left: 35%;
+            bottom: 5%;
+
+            background: #b8d8cb;
+
+            animation-delay: 4s;
+
+        }
+
+
+        @keyframes mistFloat {
+
+            0%,
+            100% {
+
+                transform:
+                    translateY(0)
+                    translateX(0);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-25px)
+                    translateX(20px);
+
+            }
+
+        }
+
+
+        /* ==================================================
+           CSS：主要容器
+           ================================================== */
+
+        .page-container {
+
+            position: relative;
+
+            z-index: 1;
+
+            width: min(1200px, 94%);
+
+            margin: 0 auto;
+
+            padding: 35px 0 50px;
+
+        }
+
+
+        /* ==================================================
+           CSS：Header
+           ================================================== */
+
+        .hero {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 45px 35px;
+
+            margin-bottom: 25px;
+
+            border:
+
+                2px solid
+                rgba(217, 180, 91, 0.8);
+
+            border-radius: 8px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(12, 38, 61, 0.96),
+                    rgba(24, 59, 91, 0.92)
+                );
+
+            box-shadow: var(--shadow);
+
+            text-align: center;
+
+        }
+
+
+        .hero::before {
+
+            content: "☁";
+
+            position: absolute;
+
+            left: 5%;
+
+            top: 5px;
+
+            font-size: 100px;
+
+            color:
+                rgba(255, 255, 255, 0.06);
+
+        }
+
+
+        .hero::after {
+
+            content: "☁";
+
+            position: absolute;
+
+            right: 5%;
+
+            bottom: -25px;
+
+            font-size: 130px;
+
+            color:
+                rgba(255, 255, 255, 0.05);
+
+        }
+
+
+        .hero-symbol {
+
+            font-size: 42px;
+
+            color: var(--light-gold);
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .hero-title {
+
+            margin: 0;
+
+            color: var(--light-gold);
+
+            font-size:
+                clamp(32px, 6vw, 58px);
+
+            font-weight: 900;
+
+            letter-spacing: 8px;
+
+            text-shadow:
+
+                0 0 10px
+                rgba(242, 217, 139, 0.3);
+
+        }
+
+
+        .hero-subtitle {
+
+            margin: 15px 0 0;
+
+            color: #dceee6;
+
+            font-size: 17px;
+
+            letter-spacing: 4px;
+
+        }
+
+
+        .hero-line {
+
+            width: 160px;
+
+            height: 2px;
+
+            margin: 22px auto 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--gold),
+                    transparent
+                );
+
+        }
+
+
+        /* ==================================================
+           CSS：左右區域
+           ================================================== */
+
+        .content-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                350px 1fr;
+
+            gap: 25px;
+
+            align-items: start;
+
+        }
+
+
+        /* ==================================================
+           CSS：卡片
+           ================================================== */
+
+        .card {
+
+            position: relative;
+
+            background:
+                rgba(245, 239, 223, 0.96);
+
+            border:
+
+                2px solid
+                var(--gold);
+
+            border-radius: 8px;
+
+            padding: 25px;
+
+            box-shadow: var(--shadow);
+
+        }
+
+
+        .card::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 8px;
+            right: 8px;
+            top: 8px;
+            bottom: 8px;
+
+            border:
+                1px solid
+                rgba(53, 92, 74, 0.2);
+
+            pointer-events: none;
+
+        }
+
+
+        .card-title {
+
+            position: relative;
+
+            margin: 0 0 22px;
+
+            color: var(--immortal-blue);
+
+            font-size: 25px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        .card-title::after {
+
+            content: "";
+
+            display: block;
+
+            width: 70px;
+
+            height: 3px;
+
+            margin-top: 10px;
+
+            background: var(--gold);
+
+        }
+
+
+        /* ==================================================
+           CSS：表單
+           ================================================== */
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .form-label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: 900;
+
+            color: var(--mountain-green);
+
+        }
+
+
+        .form-input,
+        .form-select {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border:
+
+                1px solid
+                #c9b98d;
+
+            border-radius: 4px;
+
+            background: #fffdf7;
+
+            color: var(--ink);
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition: 0.25s;
+
+        }
+
+
+        .form-input:focus,
+        .form-select:focus {
+
+            border-color:
+                var(--gold);
+
+            box-shadow:
+
+                0 0 0 3px
+                rgba(217, 180, 91, 0.2);
+
+        }
+
+
+        /* ==================================================
+           CSS：新增按鈕
+           ================================================== */
+
+        .submit-button {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border:
+
+                1px solid
+                var(--gold);
+
+            border-radius: 4px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    var(--immortal-blue),
+                    var(--deep-blue)
+                );
+
+            color: var(--light-gold);
+
+            font-size: 17px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+        }
+
+
+        .submit-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+
+                0 8px 20px
+                rgba(12, 38, 61, 0.3);
+
+        }
+
+
+        .submit-button:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+        }
+
+
+        /* ==================================================
+           CSS：表格
+           ================================================== */
+
+        .table-wrapper {
+
+            position: relative;
+
+            overflow-x: auto;
+
+        }
+
+
+        .record-table {
+
+            width: 100%;
+
+            border-collapse:
+                collapse;
+
+            min-width: 650px;
+
+        }
+
+
+        .record-table th {
+
+            padding: 13px 10px;
+
+            color: var(--light-gold);
+
+            background:
+                var(--immortal-blue);
+
+            border-bottom:
+                2px solid var(--gold);
+
+            text-align: left;
+
+        }
+
+
+        .record-table th:first-child {
+
+            border-radius:
+                4px 0 0 0;
+
+        }
+
+
+        .record-table th:last-child {
+
+            border-radius:
+                0 4px 0 0;
+
+        }
+
+
+        .record-table td {
+
+            padding: 13px 10px;
+
+            border-bottom:
+                1px solid
+                #d7ccb0;
+
+            background:
+                rgba(255, 253, 247, 0.8);
+
+            font-weight: 600;
+
+        }
+
+
+        .record-table tbody tr {
+
+            transition: 0.25s;
+
+        }
+
+
+        .record-table tbody tr:hover td {
+
+            background:
+                #fff8df;
+
+        }
+
+
+        /* ==================================================
+           CSS：登山難度 Badge
+           ================================================== */
+
+        .difficulty-badge {
+
+            display: inline-block;
+
+            padding: 6px 13px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+
+            font-weight: 900;
+
+            border: 1px solid;
+
+        }
+
+
+        .difficulty-easy {
+
+            color: #2d7253;
+
+            background:
+                rgba(111, 157, 131, 0.15);
+
+            border-color:
+                #6f9d83;
+
+        }
+
+
+        .difficulty-medium {
+
+            color: #9a7120;
+
+            background:
+                rgba(217, 180, 91, 0.18);
+
+            border-color:
+                var(--gold);
+
+        }
+
+
+        .difficulty-hard {
+
+            color: #963d3d;
+
+            background:
+                rgba(168, 66, 66, 0.12);
+
+            border-color:
+                var(--danger);
+
+        }
+
+
+        /* ==================================================
+           CSS：刪除按鈕
+           ================================================== */
+
+        .delete-button {
+
+            padding: 7px 12px;
+
+            border:
+                1px solid
+                var(--danger);
+
+            border-radius: 4px;
+
+            background:
+                transparent;
+
+            color: var(--danger);
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .delete-button:hover {
+
+            color: white;
+
+            background:
+                var(--danger);
+
+            box-shadow:
+                0 0 10px
+                rgba(168, 66, 66, 0.3);
+
+        }
+
+
+        .delete-button:disabled {
+
+            opacity: 0.5;
+
+            cursor: not-allowed;
+
+        }
+
+
+        /* ==================================================
+           CSS：Loading
+           ================================================== */
+
+        .loading-container {
+
+            min-height: 250px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+
+        .cultivation-loader {
+
+            width: 60px;
+
+            height: 60px;
+
+            border:
+
+                4px solid
+                rgba(217, 180, 91, 0.2);
+
+            border-top-color:
+                var(--gold);
+
+            border-right-color:
+                var(--jade-green);
+
+            border-radius: 50%;
+
+            animation:
+                cultivationSpin 1s linear infinite;
+
+            box-shadow:
+
+                0 0 15px
+                rgba(217, 180, 91, 0.35);
+
+        }
+
+
+        @keyframes cultivationSpin {
+
+            to {
+
+                transform:
+                    rotate(360deg);
+
+            }
+
+        }
+
+
+        .loading-text {
+
+            margin-top: 16px;
+
+            color: var(--mountain-green);
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* ==================================================
+           CSS：無資料
+           ================================================== */
+
+        .empty-message {
+
+            padding: 50px 20px;
+
+            text-align: center;
+
+            color: #6b756d;
+
+            font-weight: 700;
+
+        }
+
+
+        /* ==================================================
+           CSS：Toast
+           ================================================== */
+
+        .toast {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            z-index: 100;
+
+            width: min(380px, 90%);
+
+            padding: 20px;
+
+            border:
+
+                2px solid
+                var(--gold);
+
+            border-radius: 6px;
+
+            background:
+                var(--paper);
+
+            box-shadow: var(--shadow);
+
+            transform:
+                translateY(150px);
+
+            opacity: 0;
+
+            transition: 0.35s;
+
+        }
+
+
+        .toast.show {
+
+            transform:
+                translateY(0);
+
+            opacity: 1;
+
+        }
+
+
+        .toast-title {
+
+            margin: 0 0 7px;
+
+            color: var(--immortal-blue);
+
+            font-size: 18px;
+
+            font-weight: 900;
+
+        }
+
+
+        .toast-message {
+
+            margin: 0;
+
+            color: var(--ink);
+
+            font-weight: 600;
+
+        }
+
+
+        /* ==================================================
+           CSS：Footer
+           ================================================== */
+
+        .footer {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            color:
+                rgba(255, 255, 255, 0.75);
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* ==================================================
+           CSS：手機版
+           ================================================== */
+
+        @media (max-width: 850px) {
+
+            .content-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .page-container {
+
+                width: 92%;
+
+                padding-top: 20px;
+
+            }
+
+
+            .hero {
+
+                padding: 35px 20px;
+
+            }
+
+
+            .hero-title {
+
+                letter-spacing: 4px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         HTML：仙氣裝飾
+         ================================================== -->
+
+    <div class="mist mist-one"></div>
+
+    <div class="mist mist-two"></div>
+
+    <div class="mist mist-three"></div>
+
+
+    <!-- ==================================================
+         HTML：主要頁面
+         ================================================== -->
+
+    <main class="page-container">
+
+
+        <!-- ==================================================
+             HERO
+             ================================================== -->
+
+        <header class="hero">
+
+            <div class="hero-symbol">
+                ☯
+            </div>
+
+            <h1 class="hero-title">
+                仙途登山錄
+            </h1>
+
+            <p class="hero-subtitle">
+                行萬里山河 · 踏九州仙途
+            </p>
+
+            <div class="hero-line"></div>
+
+        </header>
+
+
+        <!-- ==================================================
+             左右內容
+             ================================================== -->
+
+        <section class="content-grid">
+
+
+            <!-- ==================================================
+                 左側：新增登山紀錄
+                 ================================================== -->
+
+            <div class="card">
+
+                <h2 class="card-title">
+                    🏔️ 新增登山紀錄
+                </h2>
+
+
+                <form
+                    id="record-form">
+
+
+                    <!-- 日期 -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="date">
+
+                            📅 登山日期
+
+                        </label>
+
+                        <input
+                            class="form-input"
+                            type="date"
+                            id="date"
+                            name="date"
+                            required>
+
+                    </div>
+
+
+                    <!-- 山名 -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="name">
+
+                            🏔️ 山岳名稱
+
+                        </label>
+
+                        <input
+                            class="form-input"
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="例如：玉山"
+                            required>
+
+                    </div>
+
+
+                    <!-- 難度 -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="role">
+
+                            ⚔️ 登山難度
+
+                        </label>
+
+
+                        <select
+                            class="form-select"
+                            id="role"
+                            name="role"
+                            required>
+
+                            <option value="">
+                                請選擇登山難度
+                            </option>
+
+                            <option value="簡單">
+                                🌿 簡單
+                            </option>
+
+                            <option value="中等">
+                                ⚔️ 中等
+                            </option>
+
+                            <option value="困難">
+                                🔥 困難
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- 新增 -->
+
+                    <button
+                        class="submit-button"
+                        id="submit-button"
+                        type="submit">
+
+                        ✦ 記錄此段仙途 ✦
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+
+            <!-- ==================================================
+                 右側：爬山紀錄
+                 ================================================== -->
+
+            <div class="card">
+
+                <h2 class="card-title">
+                    📜 爬山紀錄
+                </h2>
+
+
+                <div
+                    class="table-wrapper"
+                    id="table-area">
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ==================================================
+             Footer
+             ================================================== -->
+
+        <footer class="footer">
+
+            ☁️ 山高水長 · 仙途漫漫 · 步步留痕 ☁️
+
+        </footer>
+
+
+    </main>
+
+
+    <!-- ==================================================
+         Toast
+         ================================================== -->
+
+    <div
+        class="toast"
+        id="toast">
+
+        <h3
+            class="toast-title"
+            id="toast-title">
+
+            操作成功
+
+        </h3>
+
+        <p
+            class="toast-message"
+            id="toast-message">
+
+            資料處理完成
+
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         JavaScript
+         ================================================== -->
+
+    <script>
+
+
+        /* ==================================================
+           JS：API 設定
+           ================================================== */
+
+        // ★★★ 請把這裡換成你的 Google Apps Script Web App 網址 ★★★
+
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbwKbPEagGq3S5d9yIg8WYDujLHQylfyED_ETo2V4WeGGfILHPNXGhPVHgZK7sMej-bp/exec";
+
+
+        /* ==================================================
+           JS：取得 DOM
+           ================================================== */
+
+        const recordForm =
+            document.getElementById(
+                "record-form"
+            );
+
+
+        const submitButton =
+            document.getElementById(
+                "submit-button"
+            );
+
+
+        const tableArea =
+            document.getElementById(
+                "table-area"
+            );
+
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        const toastTitle =
+            document.getElementById(
+                "toast-title"
+            );
+
+
+        const toastMessage =
+            document.getElementById(
+                "toast-message"
+            );
+
+
+        /* ==================================================
+           JS：Toast
+           ================================================== */
+
+        function showToast(
+            title,
+            message
+        ) {
+
+            toastTitle.textContent =
+                title;
+
+            toastMessage.textContent =
+                message;
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                3000
+            );
+
+        }
+
+
+        /* ==================================================
+           JS：Loading
+           ================================================== */
+
+        function showLoading() {
+
+            tableArea.innerHTML = `
+
+                <div class="loading-container">
+
+                    <div
+                        class="cultivation-loader">
+                    </div>
+
+                    <div
+                        class="loading-text">
+
+                        ☁️ 正在感應山川靈氣...
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* ==================================================
+           JS：登山難度 Badge
+           ================================================== */
+
+        function getDifficultyBadge(
+            role
+        ) {
+
+            if (role === "簡單") {
+
+                return `
+
+                    <span
+                        class="difficulty-badge difficulty-easy">
+
+                        🌿 簡單
+
+                    </span>
+
+                `;
+
+            }
+
+
+            if (role === "中等") {
+
+                return `
+
+                    <span
+                        class="difficulty-badge difficulty-medium">
+
+                        ⚔️ 中等
+
+                    </span>
+
+                `;
+
+            }
+
+
+            if (role === "困難") {
+
+                return `
+
+                    <span
+                        class="difficulty-badge difficulty-hard">
+
+                        🔥 困難
+
+                    </span>
+
+                `;
+
+            }
+
+
+            return `
+
+                <span
+                    class="difficulty-badge">
+
+                    ${role || "未知"}
+
+                </span>
+
+            `;
+
+        }
+
+
+        /* ==================================================
+           JS：GET 讀取資料
+           ================================================== */
+
+        async function fetchRecords() {
+
+            try {
+
+                showLoading();
+
+
+                const response =
+                    await fetch(
+                        `${API_URL}?action=read`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `HTTP 錯誤：${response.status}`
+                    );
+
+                }
+
+
+                const result =
+                    await response.json();
+
+
+                if (
+                    result.status !==
+                    "success"
+                ) {
+
+                    throw new Error(
+                        result.message ||
+                        "讀取資料失敗"
+                    );
+
+                }
+
+
+                renderRecords(
+                    result.data
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "讀取錯誤：",
+                    error
+                );
+
+
+                tableArea.innerHTML = `
+
+                    <div
+                        class="empty-message">
+
+                        ❌ 山河紀錄讀取失敗
+
+                        <br><br>
+
+                        ${error.message}
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* ==================================================
+           JS：渲染爬山紀錄
+           ================================================== */
+
+        function renderRecords(
+            records
+        ) {
+
+
+            if (
+                !records ||
+                records.length === 0
+            ) {
+
+                tableArea.innerHTML = `
+
+                    <div
+                        class="empty-message">
+
+                        📜
+
+                        <br><br>
+
+                        尚無登山紀錄
+
+                        <br>
+
+                        快留下你的第一段仙途吧！
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            let html = `
+
+                <table
+                    class="record-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                日期
+                            </th>
+
+                            <th>
+                                山岳
+                            </th>
+
+                            <th>
+                                登山難度
+                            </th>
+
+                            <th>
+                                操作
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+            `;
+
+
+            records.forEach(
+                function(record) {
+
+                    html += `
+
+                        <tr>
+
+                            <td>
+                                ${record.id ?? ""}
+                            </td>
+
+                            <td>
+                                ${record.date ?? ""}
+                            </td>
+
+                            <td>
+                                🏔️
+                                ${record.name ?? ""}
+                            </td>
+
+                            <td>
+                                ${getDifficultyBadge(
+                                    record.role
+                                )}
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="delete-button"
+                                    data-id="${record.id}">
+
+                                    🗑️ 刪除
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            );
+
+
+            html += `
+
+                    </tbody>
+
+                </table>
+
+            `;
+
+
+            tableArea.innerHTML =
+                html;
+
+        }
+
+
+        /* ==================================================
+           JS：新增登山紀錄 POST
+           ================================================== */
+
+        recordForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                // 防止重複送出
+                submitButton.disabled =
+                    true;
+
+
+                submitButton.textContent =
+                    "☁️ 正在記錄仙途...";
+
+
+                try {
+
+
+                    const payload = {
+
+                        date:
+                            document
+                                .getElementById(
+                                    "date"
+                                )
+                                .value,
+
+                        name:
+                            document
+                                .getElementById(
+                                    "name"
+                                )
+                                .value
+                                .trim(),
+
+                        role:
+                            document
+                                .getElementById(
+                                    "role"
+                                )
+                                .value
+
+                    };
+
+
+                    const response =
+                        await fetch(
+                            API_URL,
+                            {
+
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "text/plain"
+
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        payload
+                                    )
+
+                            }
+                        );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            `HTTP 錯誤：${response.status}`
+                        );
+
+                    }
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (
+                        result.status !==
+                        "success"
+                    ) {
+
+                        throw new Error(
+                            result.message ||
+                            "新增失敗"
+                        );
+
+                    }
+
+
+                    showToast(
+                        "✦ 登山紀錄成功 ✦",
+                        "此段仙途已記錄於玉簡之中。"
+                    );
+
+
+                    recordForm.reset();
+
+
+                    await fetchRecords();
+
+
+                } catch (error) {
+
+                    console.error(
+                        "新增錯誤：",
+                        error
+                    );
+
+
+                    showToast(
+                        "⚠️ 紀錄失敗",
+                        error.message
+                    );
+
+
+                } finally {
+
+                    submitButton.disabled =
+                        false;
+
+                    submitButton.textContent =
+                        "✦ 記錄此段仙途 ✦";
+
+                }
+
+            }
+        );
+
+
+        /* ==================================================
+           JS：刪除紀錄
+           ================================================== */
+
+        async function deleteRecord(
+            id
+        ) {
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        API_URL,
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "text/plain"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    action:
+                                        "delete",
+
+                                    id:
+                                        id
+
+                                })
+
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `HTTP 錯誤：${response.status}`
+                    );
+
+                }
+
+
+                const result =
+                    await response.json();
+
+
+                if (
+                    result.status !==
+                    "success"
+                ) {
+
+                    throw new Error(
+                        result.message ||
+                        "刪除失敗"
+                    );
+
+                }
+
+
+                showToast(
+                    "🗑️ 紀錄已刪除",
+                    "此段登山紀錄已從玉簡中移除。"
+                );
+
+
+                // 刪除後重新讀取
+                await fetchRecords();
+
+
+            } catch (error) {
+
+                console.error(
+                    "刪除錯誤：",
+                    error
+                );
+
+
+                showToast(
+                    "⚠️ 刪除失敗",
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        /* ==================================================
+           JS：刪除按鈕事件
+           ================================================== */
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+
+                if (
+                    event.target.classList.contains(
+                        "delete-button"
+                    )
+                ) {
+
+
+                    const id =
+                        event.target.dataset.id;
+
+
+                    const confirmed =
+                        window.confirm(
+                            `確定要刪除 ID ${id} 的爬山紀錄嗎？`
+                        );
+
+
+                    if (!confirmed) {
+
+                        return;
+
+                    }
+
+
+                    event.target.disabled =
+                        true;
+
+
+                    event.target.textContent =
+                        "刪除中...";
+
+
+                    deleteRecord(id);
+
+                }
+
+            }
+        );
+
+
+        /* ==================================================
+           JS：頁面啟動
+           ================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                fetchRecords();
+
+            }
+        );
+
+
+    </script>
+
+</body>
+
+</html>
+

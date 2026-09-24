@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Frieren｜旅途資料館</title>
+
+    <style>
+
+        /* =========================================
+           CSS：全域設定
+           ========================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --forest-dark: #26352c;
+            --forest: #526957;
+            --forest-light: #879b86;
+            --cream: #f4f0df;
+            --paper: #fffdf4;
+            --gold: #c5a96b;
+            --gold-light: #e1c98a;
+            --text: #354238;
+            --muted: #7c877b;
+            --border: #ddd8c4;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family:
+                "Noto Sans TC",
+                "Microsoft JhengHei",
+                sans-serif;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(197, 169, 107, 0.15),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(82, 105, 87, 0.14),
+                    transparent 30%
+                ),
+                var(--cream);
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           CSS：背景裝飾
+           ========================================= */
+
+        .background-decoration {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .moon {
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 35%,
+                    #fffdf1,
+                    #e5dcbf
+                );
+
+            top: 60px;
+            right: 8%;
+
+            box-shadow:
+                0 0 50px rgba(255, 248, 210, 0.55);
+        }
+
+        .leaf {
+            position: absolute;
+
+            font-size: 70px;
+
+            opacity: 0.08;
+
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .leaf.one {
+            left: 5%;
+            top: 25%;
+        }
+
+        .leaf.two {
+            right: 5%;
+            top: 55%;
+            animation-delay: 2s;
+        }
+
+        .leaf.three {
+            left: 35%;
+            bottom: 5%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-18px) rotate(5deg);
+            }
+        }
+
+
+        /* =========================================
+           CSS：Header
+           ========================================= */
+
+        header {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(38, 53, 44, 0.98),
+                    rgba(82, 105, 87, 0.96)
+                );
+
+            color: white;
+
+            padding: 22px 30px;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+
+            box-shadow:
+                0 5px 25px rgba(38, 53, 44, 0.18);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+        }
+
+        .logo-icon {
+            font-size: 36px;
+        }
+
+        .logo h1 {
+            font-size: 22px;
+
+            font-weight: 600;
+
+            letter-spacing: 3px;
+        }
+
+        .logo p {
+            font-size: 12px;
+
+            color: #d9dfd1;
+
+            margin-top: 3px;
+        }
+
+
+        /* =========================================
+           CSS：主要內容
+           ========================================= */
+
+        main {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 50px 25px 70px;
+        }
+
+
+        /* =========================================
+           CSS：Hero
+           ========================================= */
+
+        .hero {
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+        .hero-symbol {
+            font-size: 42px;
+
+            color: var(--gold);
+
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-family:
+                "Noto Serif TC",
+                "Microsoft JhengHei",
+                serif;
+
+            font-size: 38px;
+
+            color: var(--forest-dark);
+
+            letter-spacing: 5px;
+
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: var(--muted);
+
+            font-size: 15px;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================================
+           CSS：左右欄
+           ========================================= */
+
+        .content-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(300px, 380px)
+                1fr;
+
+            gap: 28px;
+
+            align-items: start;
+        }
+
+
+        /* =========================================
+           CSS：卡片
+           ========================================= */
+
+        .card {
+            background:
+                rgba(255, 253, 244, 0.92);
+
+            border:
+                1px solid rgba(221, 216, 196, 0.9);
+
+            border-radius: 18px;
+
+            padding: 26px;
+
+            box-shadow:
+                0 15px 40px rgba(60, 70, 55, 0.09);
+
+            backdrop-filter: blur(8px);
+        }
+
+        .card-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--forest-dark);
+
+            font-size: 19px;
+
+            margin-bottom: 22px;
+
+            padding-bottom: 14px;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .card-title span {
+            color: var(--gold);
+        }
+
+
+        /* =========================================
+           CSS：表單
+           ========================================= */
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: var(--forest);
+
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+
+            width: 100%;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 10px;
+
+            padding: 12px 14px;
+
+            background: #fffef8;
+
+            color: var(--text);
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.25s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+
+            border-color: var(--forest);
+
+            box-shadow:
+                0 0 0 3px rgba(82, 105, 87, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+
+            resize: vertical;
+        }
+
+
+        /* =========================================
+           CSS：按鈕
+           ========================================= */
+
+        .btn {
+
+            width: 100%;
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--forest-dark),
+                    var(--forest)
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+            margin-top: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(38, 53, 44, 0.18);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* =========================================
+           CSS：查詢區
+           ========================================= */
+
+        .search-area {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+        }
+
+        .search-area input {
+
+            flex: 1;
+
+            padding: 12px 15px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 10px;
+
+            background: #fffef8;
+
+            outline: none;
+        }
+
+        .search-area input:focus {
+
+            border-color:
+                var(--forest);
+        }
+
+        .search-btn {
+
+            border: none;
+
+            background:
+                var(--gold);
+
+            color: white;
+
+            padding: 0 20px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .search-btn:hover {
+            background: #b49657;
+        }
+
+
+        /* =========================================
+           CSS：資料統計
+           ========================================= */
+
+        .data-info {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 15px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           CSS：資料表格
+           ========================================= */
+
+        .table-wrapper {
+
+            overflow-x: auto;
+
+            border-radius: 12px;
+
+            border:
+                1px solid var(--border);
+        }
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 650px;
+
+            background: white;
+        }
+
+        th {
+
+            background:
+                var(--forest-dark);
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            padding: 13px 12px;
+
+            text-align: left;
+        }
+
+        td {
+
+            padding: 14px 12px;
+
+            border-bottom:
+                1px solid #eeeade;
+
+            font-size: 13px;
+
+            vertical-align: middle;
+        }
+
+        tbody tr {
+
+            transition: 0.2s;
+        }
+
+        tbody tr:hover {
+
+            background:
+                #f8f6ea;
+        }
+
+        tbody tr:last-child td {
+
+            border-bottom: none;
+        }
+
+
+        /* =========================================
+           CSS：Type 標籤
+           ========================================= */
+
+        .tag {
+
+            display: inline-block;
+
+            padding: 4px 10px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+        .tag-book {
+
+            background: #e7dfc3;
+
+            color: #75613b;
+        }
+
+        .tag-mountant {
+
+            background: #dce8df;
+
+            color: #41604b;
+        }
+
+        .tag-wilderness {
+
+            background: #e0e7d8;
+
+            color: #526344;
+        }
+
+        .tag-default {
+
+            background: #ececec;
+
+            color: #666;
+        }
+
+
+        /* =========================================
+           CSS：連結
+           ========================================= */
+
+        .link {
+
+            color:
+                var(--forest);
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        .link:hover {
+
+            color:
+                var(--gold);
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           CSS：Loading
+           ========================================= */
+
+        .loading {
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: var(--muted);
+        }
+
+        .spinner {
+
+            width: 30px;
+
+            height: 30px;
+
+            border:
+                3px solid #ddd;
+
+            border-top-color:
+                var(--forest);
+
+            border-radius: 50%;
+
+            margin: 0 auto 15px;
+
+            animation:
+                spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* =========================================
+           CSS：沒有資料
+           ========================================= */
+
+        .empty {
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================
+           CSS：提示框
+           ========================================= */
+
+        .toast {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            width: 330px;
+
+            padding: 18px 20px;
+
+            background:
+                rgba(255, 253, 244, 0.97);
+
+            border:
+                1px solid var(--border);
+
+            border-left:
+                5px solid var(--forest);
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.15);
+
+            display: flex;
+
+            gap: 12px;
+
+            align-items: flex-start;
+
+            transform:
+                translateX(120%);
+
+            opacity: 0;
+
+            transition: 0.4s;
+
+            z-index: 999;
+        }
+
+        .toast.show {
+
+            transform:
+                translateX(0);
+
+            opacity: 1;
+        }
+
+        .toast-icon {
+
+            font-size: 25px;
+        }
+
+        .toast-title {
+
+            font-weight: 700;
+
+            color: var(--forest-dark);
+
+            margin-bottom: 3px;
+        }
+
+        .toast-message {
+
+            font-size: 13px;
+
+            color: var(--muted);
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           CSS：Footer
+           ========================================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================================
+           CSS：手機版
+           ========================================= */
+
+        @media (max-width: 850px) {
+
+            .content-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .hero h2 {
+
+                font-size: 30px;
+
+            }
+
+            .moon {
+
+                width: 120px;
+
+                height: 120px;
+
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+
+                padding: 18px;
+
+            }
+
+            .logo h1 {
+
+                font-size: 18px;
+
+            }
+
+            main {
+
+                padding:
+                    35px 15px 50px;
+
+            }
+
+            .card {
+
+                padding: 20px;
+
+            }
+
+            .search-area {
+
+                flex-direction: column;
+
+            }
+
+            .search-btn {
+
+                height: 44px;
+
+            }
+
+            .toast {
+
+                left: 15px;
+
+                right: 15px;
+
+                bottom: 15px;
+
+                width: auto;
+
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         HTML：背景
+         ========================================= -->
+
+    <div class="background-decoration">
+
+        <div class="moon"></div>
+
+        <div class="leaf one">🍃</div>
+
+        <div class="leaf two">🌿</div>
+
+        <div class="leaf three">🍂</div>
+
+    </div>
+
+
+    <!-- =========================================
+         HTML：Header
+         ========================================= -->
+
+    <header>
+
+        <div class="header-inner">
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    ✧
+                </div>
+
+                <div>
+
+                    <h1>
+                        旅途資料館
+                    </h1>
+
+                    <p>
+                        Beyond the journey, memories remain.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         HTML：主要內容
+         ========================================= -->
+
+    <main>
+
+
+        <!-- Hero -->
+
+        <section class="hero">
+
+            <div class="hero-symbol">
+                ✦
+            </div>
+
+            <h2>
+                旅途中的記憶
+            </h2>
+
+            <p>
+                書籍、山岳與荒野，記錄每一段值得留下的旅程
+            </p>
+
+        </section>
+
+
+        <!-- 左右欄 -->
+
+        <section class="content-grid">
+
+
+            <!-- =====================================
+                 左側：新增資料
+                 ===================================== -->
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    <span>✦</span>
+
+                    新增旅途資料
+
+                </div>
+
+
+                <form id="dataForm">
+
+
+                    <!-- name -->
+
+                    <div class="form-group">
+
+                        <label>
+                            名稱
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="例如：勇者的旅途"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- link-address -->
+
+                    <div class="form-group">
+
+                        <label>
+                            網址
+                        </label>
+
+                        <input
+                            type="url"
+                            id="linkAddress"
+                            placeholder="https://example.com"
+                        >
+
+                    </div>
+
+
+                    <!-- type -->
+
+                    <div class="form-group">
+
+                        <label>
+                            類型
+                        </label>
+
+                        <select id="type">
+
+                            <option value="book">
+                                📖 Book｜書籍
+                            </option>
+
+                            <option value="mountant">
+                                ⛰️ Mountant｜山岳
+                            </option>
+
+                            <option value="wilderness">
+                                🌲 Wilderness｜荒野
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- podcast -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Podcast
+                        </label>
+
+                        <input
+                            type="url"
+                            id="podcast"
+                            placeholder="Podcast 網址"
+                        >
+
+                    </div>
+
+
+                    <!-- remark -->
+
+                    <div class="form-group">
+
+                        <label>
+                            備註
+                        </label>
+
+                        <textarea
+                            id="remark"
+                            placeholder="寫下一些關於這趟旅程的記憶..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn"
+                        id="submitBtn"
+                    >
+                        ✦ 新增至旅途紀錄
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- =====================================
+                 右側：查詢與資料表
+                 ===================================== -->
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    <span>⌕</span>
+
+                    旅途資料查詢
+
+                </div>
+
+
+                <!-- 搜尋 -->
+
+                <div class="search-area">
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="搜尋名稱、類型、備註..."
+                    >
+
+                    <button
+                        class="search-btn"
+                        id="searchBtn"
+                        type="button"
+                    >
+                        搜尋
+                    </button>
+
+                </div>
+
+
+                <!-- 資料統計 -->
+
+                <div class="data-info">
+
+                    <span id="dataCount">
+                        等待資料...
+                    </span>
+
+                    <button
+                        type="button"
+                        id="refreshBtn"
+                        style="
+                            border:none;
+                            background:none;
+                            color:#526957;
+                            cursor:pointer;
+                        "
+                    >
+                        ↻ 重新整理
+                    </button>
+
+                </div>
+
+
+                <!-- 表格 -->
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    ID
+                                </th>
+
+                                <th>
+                                    名稱
+                                </th>
+
+                                <th>
+                                    類型
+                                </th>
+
+                                <th>
+                                    網址
+                                </th>
+
+                                <th>
+                                    Podcast
+                                </th>
+
+                                <th>
+                                    備註
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="dataTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="loading"
+                                >
+
+                                    <div class="spinner"></div>
+
+                                    正在讀取旅途資料...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         HTML：Footer
+         ========================================= -->
+
+    <footer>
+
+        ✧ 旅途不會結束，記憶會一直留下 ✧
+
+    </footer>
+
+
+    <!-- =========================================
+         HTML：美化提示框
+         ========================================= -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+
+        <div
+            class="toast-icon"
+            id="toastIcon"
+        >
+            ✦
+        </div>
+
+        <div>
+
+            <div
+                class="toast-title"
+                id="toastTitle"
+            >
+                操作成功
+            </div>
+
+            <div
+                class="toast-message"
+                id="toastMessage"
+            >
+                資料已成功處理
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         JavaScript
+         ========================================= -->
+
+    <script>
+
+
+        /* =========================================
+           JS：API 設定
+           ========================================= */
+
+        /*
+         * ★★★ 請把下面的 API_URL
+         * 換成你的 Google Apps Script Web App URL
+         *
+         * 例如：
+         *
+         * const API_URL =
+         * "https://script.google.com/macros/s/xxxxxxxx/exec";
+         */
+
+        const API_URL = "https://script.google.com/macros/s/AKfycbwmGsFIzppOW_H03SeRjAo71FdvtHSi8JHJFKb7NDYSx8ZpZtZhW32F450LqN_o7mK8zg/exec";
+
+
+        /* =========================================
+           JS：全域資料
+           ========================================= */
+
+        let allData = [];
+
+
+        /* =========================================
+           JS：取得 DOM
+           ========================================= */
+
+        const dataTable =
+            document.getElementById("dataTable");
+
+        const dataCount =
+            document.getElementById("dataCount");
+
+        const dataForm =
+            document.getElementById("dataForm");
+
+        const submitBtn =
+            document.getElementById("submitBtn");
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const searchBtn =
+            document.getElementById("searchBtn");
+
+        const refreshBtn =
+            document.getElementById("refreshBtn");
+
+
+        /* =========================================
+           JS：提示框
+           ========================================= */
+
+        function showToast(
+            title,
+            message,
+            icon = "✦"
+        ) {
+
+            const toast =
+                document.getElementById("toast");
+
+            const toastTitle =
+                document.getElementById("toastTitle");
+
+            const toastMessage =
+                document.getElementById("toastMessage");
+
+            const toastIcon =
+                document.getElementById("toastIcon");
+
+
+            toastTitle.textContent = title;
+
+            toastMessage.textContent = message;
+
+            toastIcon.textContent = icon;
+
+
+            toast.classList.add("show");
+
+
+            setTimeout(function () {
+
+                toast.classList.remove("show");
+
+            }, 3000);
+
+        }
+
+
+        /* =========================================
+           JS：Type 標籤
+           ========================================= */
+
+        function getTypeTag(type) {
+
+            const typeText =
+                String(type || "").toLowerCase();
+
+
+            if (typeText === "book") {
+
+                return `
+                    <span class="tag tag-book">
+                        📖 BOOK
+                    </span>
+                `;
+
+            }
+
+
+            if (
+                typeText === "mountant" ||
+                typeText === "mountain"
+            ) {
+
+                return `
+                    <span class="tag tag-mountant">
+                        ⛰️ MOUNTANT
+                    </span>
+                `;
+
+            }
+
+
+            if (
+                typeText === "wilderness"
+            ) {
+
+                return `
+                    <span class="tag tag-wilderness">
+                        🌲 WILDERNESS
+                    </span>
+                `;
+
+            }
+
+
+            return `
+                <span class="tag tag-default">
+                    ${escapeHTML(type)}
+                </span>
+            `;
+
+        }
+
+
+        /* =========================================
+           JS：HTML 安全處理
+           ========================================= */
+
+        function escapeHTML(value) {
+
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        /* =========================================
+           JS：網址處理
+           ========================================= */
+
+        function createLink(url, text) {
+
+            if (!url) {
+
+                return "-";
+
+            }
+
+
+            const safeUrl =
+                escapeHTML(url);
+
+            return `
+                <a
+                    class="link"
+                    href="${safeUrl}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ${escapeHTML(text)}
+                </a>
+            `;
+
+        }
+
+
+        /* =========================================
+           JS：GET
+           讀取 Google Apps Script
+           ========================================= */
+
+        async function fetchMembers() {
+
+            if (!API_URL) {
+
+                dataTable.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="empty"
+                        >
+                            ⚠️ 請先設定 API_URL
+                            <br><br>
+                            將 Google Apps Script
+                            Web App URL 貼到 JavaScript
+                            的 API_URL 中。
+                        </td>
+
+                    </tr>
+
+                `;
+
+                dataCount.textContent =
+                    "尚未設定 API";
+
+                return;
+
+            }
+
+
+            dataTable.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        class="loading"
+                    >
+
+                        <div class="spinner"></div>
+
+                        正在讀取旅途資料...
+
+                    </td>
+
+                </tr>
+
+            `;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}?action=read`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "HTTP " + response.status
+                    );
+
+                }
+
+
+                const result =
+                    await response.json();
+
+
+                if (
+                    result.status !== "success"
+                ) {
+
+                    throw new Error(
+                        result.message ||
+                        "資料讀取失敗"
+                    );
+
+                }
+
+
+                allData =
+                    Array.isArray(result.data)
+                        ? result.data
+                        : [];
+
+
+                renderTable(allData);
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                dataTable.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="empty"
+                        >
+                            ❌ 資料讀取失敗
+                            <br>
+                            ${escapeHTML(error.message)}
+                        </td>
+
+                    </tr>
+
+                `;
+
+                dataCount.textContent =
+                    "讀取失敗";
+
+
+                showToast(
+                    "讀取失敗",
+                    error.message,
+                    "⚠️"
+                );
+
+            }
+
+        }
+
+
+        /* =========================================
+           JS：渲染表格
+           ========================================= */
+
+        function renderTable(data) {
+
+            dataCount.textContent =
+                `共 ${data.length} 筆旅途紀錄`;
+
+
+            if (!data.length) {
+
+                dataTable.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="empty"
+                        >
+                            ✧ 目前還沒有旅途紀錄 ✧
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            dataTable.innerHTML =
+                data.map(function(item) {
+
+                    return `
+
+                        <tr>
+
+                            <td>
+                                ${escapeHTML(item.id)}
+                            </td>
+
+                            <td>
+                                <strong>
+                                    ${escapeHTML(item.name)}
+                                </strong>
+                            </td>
+
+                            <td>
+                                ${getTypeTag(item.type)}
+                            </td>
+
+                            <td>
+                                ${createLink(
+                                    item["link-address"],
+                                    "前往旅程"
+                                )}
+                            </td>
+
+                            <td>
+                                ${createLink(
+                                    item.podcast,
+                                    "🎧 收聽"
+                                )}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(
+                                    item.remark
+                                )}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }).join("");
+
+        }
+
+
+        /* =========================================
+           JS：搜尋功能
+           ========================================= */
+
+        function searchData() {
+
+            const keyword =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            if (!keyword) {
+
+                renderTable(allData);
+
+                return;
+
+            }
+
+
+            const filteredData =
+                allData.filter(function(item) {
+
+                    return [
+
+                        item.id,
+
+                        item.name,
+
+                        item.type,
+
+                        item["link-address"],
+
+                        item.podcast,
+
+                        item.remark
+
+                    ]
+                    .join(" ")
+                    .toLowerCase()
+                    .includes(keyword);
+
+                });
+
+
+            renderTable(filteredData);
+
+
+            dataCount.textContent =
+                `搜尋「${keyword}」找到 ${filteredData.length} 筆`;
+
+        }
+
+
+        /* =========================================
+           JS：POST
+           新增資料
+           ========================================= */
+
+        dataForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                if (!API_URL) {
+
+                    showToast(
+                        "尚未設定 API",
+                        "請先將 GAS Web App URL 貼到 API_URL。",
+                        "⚠️"
+                    );
+
+                    return;
+
+                }
+
+
+                /* -------------------------------
+                   Loading 狀態
+                   ------------------------------- */
+
+                submitBtn.disabled = true;
+
+                submitBtn.textContent =
+                    "⌛ 正在寫入旅途資料...";
+
+
+                /* -------------------------------
+                   取得表單資料
+                   ------------------------------- */
+
+                const payload = {
+
+                    name:
+                        document
+                            .getElementById("name")
+                            .value
+                            .trim(),
+
+                    "link-address":
+                        document
+                            .getElementById("linkAddress")
+                            .value
+                            .trim(),
+
+                    type:
+                        document
+                            .getElementById("type")
+                            .value,
+
+                    podcast:
+                        document
+                            .getElementById("podcast")
+                            .value
+                            .trim(),
+
+                    remark:
+                        document
+                            .getElementById("remark")
+                            .value
+                            .trim()
+
+                };
+
+
+                try {
+
+                    /* ---------------------------
+                       POST API
+
+                       注意：
+                       Content-Type 必須使用
+                       text/plain
+                       --------------------------- */
+
+                    const response =
+                        await fetch(
+                            API_URL,
+                            {
+
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "text/plain"
+
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        payload
+                                    )
+
+                            }
+                        );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "HTTP " +
+                            response.status
+                        );
+
+                    }
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (
+                        result.status !==
+                        "success"
+                    ) {
+
+                        throw new Error(
+                            result.message ||
+                            "資料新增失敗"
+                        );
+
+                    }
+
+
+                    /* ---------------------------
+                       新增成功
+                       --------------------------- */
+
+                    showToast(
+                        "新增成功",
+                        "新的旅途紀錄已經加入資料館。",
+                        "✦"
+                    );
+
+
+                    /* ---------------------------
+                       清空表單
+                       --------------------------- */
+
+                    dataForm.reset();
+
+
+                    /* ---------------------------
+                       重新取得資料
+                       --------------------------- */
+
+                    await fetchMembers();
+
+
+                } catch (error) {
+
+                    console.error(error);
+
+
+                    showToast(
+                        "新增失敗",
+                        error.message,
+                        "⚠️"
+                    );
+
+
+                } finally {
+
+                    /* ---------------------------
+                       恢復按鈕
+                       --------------------------- */
+
+                    submitBtn.disabled = false;
+
+                    submitBtn.textContent =
+                        "✦ 新增至旅途紀錄";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           JS：搜尋按鈕
+           ========================================= */
+
+        searchBtn.addEventListener(
+            "click",
+            searchData
+        );
+
+
+        /* =========================================
+           JS：按 Enter 搜尋
+           ========================================= */
+
+        searchInput.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    event.preventDefault();
+
+                    searchData();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           JS：重新整理
+           ========================================= */
+
+        refreshBtn.addEventListener(
+            "click",
+            function() {
+
+                fetchMembers();
+
+            }
+        );
+
+
+        /* =========================================
+           JS：頁面載入時自動讀取
+           ========================================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                fetchMembers();
+
+            }
+        );
+
+
+    </script>
+
+</body>
+
+</html>
+

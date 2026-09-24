@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Frieren｜芙莉蓮的旅途資料館</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           CSS：全域變數與防溢出響應式底座
+           ========================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-bright: #FFFDF8;
+            --bg-card: #FFFFFF;
+            --primary: #2D7A53;
+            --primary-hover: #1E5C3C;
+            --frieren-gold: #D97706;
+            --frieren-red: #DC2626;
+            --frieren-blue: #2563EB;
+
+            --text-main: #1F2937;
+            --text-sub: #4B5563;
+            --text-muted: #9CA3AF;
+
+            --border-color: #E5E7EB;
+            --border-gold: #FCD34D;
+            --shadow-card: 0 10px 25px -5px rgba(217, 119, 6, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden; /* 徹底杜絕橫向滾動條 */
+        }
+
+        body {
+            font-family: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-bright);
+            background-image: 
+                radial-gradient(circle at 12% 15%, rgba(252, 211, 77, 0.3), transparent 35%),
+                radial-gradient(circle at 88% 18%, rgba(220, 38, 38, 0.12), transparent 35%),
+                linear-gradient(to bottom, #FFFDF8, #FFF8EB);
+            background-attachment: fixed;
+            min-height: 100vh;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           CSS：Header 頁首設計
+           ========================================= */
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 3px solid var(--border-gold);
+            padding: 10px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            width: 100%;
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            font-size: 18px;
+            color: var(--frieren-gold);
+            background: #FEF3C7;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid var(--border-gold);
+            flex-shrink: 0;
+        }
+
+        .logo h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: "Cinzel", "Noto Serif TC", serif;
+            white-space: nowrap;
+        }
+
+        .quote-tag {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 500;
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-family: "Noto Serif TC", serif;
+        }
+
+        /* =========================================
+           CSS：主要內容網格區塊 (針對行動端防爆頁處理)
+           ========================================= */
+
+        main {
+            max-width: 1280px;
+            width: 100%;
+            margin: auto;
+            padding: 16px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 340px) minmax(0, 1fr); /* 關鍵修正：允許寬度縮小防止擠爆 */
+            gap: 20px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 2px solid #F3F4F6;
+            border-top: 4px solid var(--primary);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: var(--shadow-card);
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden; /* 防止卡片內元件溢出 */
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed var(--border-gold);
+            font-family: "Noto Serif TC", serif;
+        }
+
+        .card-title span {
+            color: var(--frieren-gold);
+        }
+
+        /* =========================================
+           CSS：表單樣式
+           ========================================= */
+
+        .form-group {
+            margin-bottom: 14px;
+            width: 100%;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            max-width: 100%;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 9px 12px;
+            background: #FAFAFA;
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--frieren-gold);
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+        }
+
+        .form-group textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+
+        .btn {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 11px;
+            background: linear-gradient(135deg, var(--primary), #3B9B67);
+            color: #FFFFFF;
+            font-family: "Noto Serif TC", serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(45, 122, 83, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =========================================
+           CSS：搜尋與資訊列
+           ========================================= */
+
+        .search-area {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+            width: 100%;
+        }
+
+        .search-area input {
+            flex: 1;
+            min-width: 0; /* 防止 input 在 flex 容器中破版 */
+            padding: 9px 12px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-area input:focus {
+            border-color: var(--frieren-gold);
+        }
+
+        .search-btn {
+            border: none;
+            background: var(--frieren-gold);
+            color: #FFFFFF;
+            padding: 0 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .data-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--text-sub);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* =========================================
+           CSS：桌面版表格結構
+           ========================================= */
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            background: #FFFFFF;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        th {
+            background: #FEF3C7;
+            color: #92400E;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 10px;
+            text-align: left;
+            border-bottom: 2px solid var(--border-gold);
+            font-family: "Noto Serif TC", serif;
+            white-space: nowrap;
+        }
+
+        th.col-id { width: 50px; }
+        th.col-name { width: 28%; }
+        th.col-type { width: 100px; }
+        th.col-link { width: 100px; }
+        th.col-podcast { width: 130px; }
+        th.col-remark { width: auto; }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #F3F4F6;
+            font-size: 14px;
+            color: var(--text-main);
+            vertical-align: middle;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+
+        td.col-id {
+            white-space: nowrap;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        tbody tr:hover {
+            background: #FFFDF5;
+        }
+
+        /* =========================================
+           CSS：標籤與按鈕樣式
+           ========================================= */
+
+        .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .tag-book { background: #FEF3C7; color: #D97706; }
+        .tag-mountant { background: #D1FAE5; color: #059669; }
+        .tag-wilderness { background: #DBEAFE; color: #2563EB; }
+        .tag-magic { background: #FCE7F3; color: #DB2777; }
+        .tag-default { background: #F3F4F6; color: #4B5563; }
+
+        .tag-podcast-text {
+            background: #FEE2E2;
+            color: #B91C1C;
+            border: 1px solid #FECACA;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            word-break: break-word;
+            max-width: 100%;
+        }
+
+        .tag-mimic {
+            display: inline-block;
+            background: #FEE2E2;
+            color: var(--frieren-red);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 1px 5px;
+            border-radius: 4px;
+            border: 1px solid #FCA5A5;
+            margin-left: 4px;
+            white-space: nowrap;
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-link-main {
+            background: #EFF6FF;
+            color: var(--frieren-blue);
+            border: 1px solid #BFDBFE;
+        }
+
+        .btn-link-podcast {
+            background: #FEF2F2;
+            color: var(--frieren-red);
+            border: 1px solid #FECACA;
+        }
+
+        /* =========================================
+           CSS：手機端（< 768px）極致防溢出佈局優化
+           ========================================= */
+
+        @media (max-width: 768px) {
+            main {
+                padding: 10px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .quote-tag {
+                display: none;
+            }
+
+            .card {
+                padding: 14px;
+            }
+
+            .table-wrapper {
+                border: none;
+                background: transparent;
+            }
+
+            table, tbody, tr, td {
+                display: block;
+                width: 100%;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tbody tr {
+                background: #FFFFFF;
+                border: 1.5px solid #E5E7EB;
+                border-left: 4px solid var(--frieren-gold);
+                border-radius: 10px;
+                padding: 12px;
+                margin-bottom: 12px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            }
+
+            td {
+                padding: 4px 0;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap; /* 允許內容過長時自動換行，防止超頁 */
+                gap: 6px;
+            }
+
+            td.col-id {
+                font-size: 12px;
+                color: var(--text-sub);
+                border-bottom: 1px dashed #F3F4F6;
+                padding-bottom: 4px;
+                margin-bottom: 4px;
+            }
+
+            td.col-name {
+                font-size: 15px;
+                font-weight: 700;
+                color: var(--primary);
+                display: block;
+                width: 100%;
+                word-break: break-word;
+                overflow-wrap: anywhere;
+            }
+
+            td.col-type, td.col-link, td.col-podcast {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            td.col-type::before { content: "類型"; font-weight: 700; color: var(--text-sub); font-size: 12px; }
+            td.col-link::before { content: "網址"; font-weight: 700; color: var(--text-sub); font-size: 12px; }
+            td.col-podcast::before { content: "Podcast"; font-weight: 700; color: var(--text-sub); font-size: 12px; }
+
+            td.col-remark {
+                font-size: 13px;
+                color: var(--text-sub);
+                margin-top: 6px;
+                background: #F9FAFB;
+                padding: 8px;
+                border-radius: 6px;
+                display: block;
+                width: 100%;
+                word-break: break-word;
+                overflow-wrap: anywhere;
+            }
+        }
+
+        .loading, .empty {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-sub);
+            font-size: 14px;
+        }
+
+        .toast {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            padding: 12px 18px;
+            background: #FFFFFF;
+            border-left: 5px solid var(--frieren-gold);
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 16px;
+            color: var(--text-sub);
+            font-size: 12px;
+            font-family: "Noto Serif TC", serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-icon">🪄</div>
+                <h1>芙莉蓮的旅途資料館</h1>
+            </div>
+            <div class="quote-tag">「人類的壽命很短，所以我想多瞭解你們一些。」</div>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-grid">
+
+            <!-- 左側：新增資料表單 -->
+            <div class="card">
+                <div class="card-title">
+                    <span>✦</span> 記載新的旅程記憶
+                </div>
+
+                <form id="dataForm">
+                    <div class="form-group">
+                        <label for="name">名稱</label>
+                        <input type="text" id="name" placeholder="例如：尋找蒼月草的花田" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="linkAddress">網址</label>
+                        <input type="url" id="linkAddress" placeholder="https://example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">類型</label>
+                        <select id="type">
+                            <option value="book">📖 書籍魔導書</option>
+                            <option value="mountant">⛰️ 山岳遺跡</option>
+                            <option value="wilderness">🌲 荒野森林</option>
+                            <option value="magic">🪄 魔法與道具</option>
+                        </select>
+                    </div>
+
+                    <!-- 修正：podcast 欄位由 url 改為 text -->
+                    <div class="form-group">
+                        <label for="podcast">Podcast 資訊</label>
+                        <input type="text" id="podcast" placeholder="輸入 Podcast 名稱、單集或網址">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remark">備註說明</label>
+                        <textarea id="remark" placeholder="寫下備註（小心寶箱怪）..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn" id="submitBtn">
+                        ✦ 記錄至魔導書
+                    </button>
+                </form>
+            </div>
+
+            <!-- 右側：資料表格展示 -->
+            <div class="card">
+                <div class="card-title">
+                    <span>⌕</span> 旅途記憶文獻庫
+                </div>
+
+                <div class="search-area">
+                    <input type="text" id="searchInput" placeholder="搜尋名稱、類型或備註...">
+                    <button class="search-btn" id="searchBtn" type="button">搜尋</button>
+                </div>
+
+                <div class="data-info">
+                    <span id="dataCount">正在翻閱魔導書...</span>
+                    <button type="button" id="refreshBtn" style="border:none; background:none; color:var(--primary); font-size:13px; font-weight:700; cursor:pointer;">
+                        ↻ 重整
+                    </button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-id">ID</th>
+                                <th class="col-name">名稱</th>
+                                <th class="col-type">類型</th>
+                                <th class="col-link">網址</th>
+                                <th class="col-podcast">Podcast</th>
+                                <th class="col-remark">備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTable">
+                            <tr>
+                                <td colspan="6" class="loading">
+                                    正在讀取旅途紀錄...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        ✦ 獻給昂斯特（Ender）—— 旅途不會結束，記憶會一直留下 ✦
+    </footer>
+
+    <div class="toast" id="toast">
+        <div style="font-weight:700; color:var(--primary); font-size:13px;" id="toastTitle">提示訊息</div>
+    </div>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbwWb0cV7KAZlyKFNh1c3b6Z3X9CuBrmghCeBBq0DOF5bGq76hI61dwCb4-MpF3_Sa4ilA/exec";
+
+        let allData = [];
+
+        const dataTable = document.getElementById("dataTable");
+        const dataCount = document.getElementById("dataCount");
+        const dataForm = document.getElementById("dataForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const searchInput = document.getElementById("searchInput");
+        const searchBtn = document.getElementById("searchBtn");
+        const refreshBtn = document.getElementById("refreshBtn");
+
+        function showToast(title) {
+            const toast = document.getElementById("toast");
+            document.getElementById("toastTitle").textContent = title;
+            toast.classList.add("show");
+            setTimeout(() => { toast.classList.remove("show"); }, 3000);
+        }
+
+        function escapeHTML(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function createLinkButton(url, labelText, customClass) {
+            if (!url || url.trim() === "" || url === "-") return "";
+            const safeUrl = escapeHTML(url.trim());
+            return `<a class="btn-link ${customClass}" href="${safeUrl}" target="_blank" rel="noopener noreferrer">${labelText}</a>`;
+        }
+
+        // 智慧渲染 Podcast 內容（判斷是網址連結還是純文字）
+        function renderPodcastContent(podcastVal) {
+            if (!podcastVal || podcastVal.trim() === "" || podcastVal === "-") return "-";
+            
+            const trimmed = podcastVal.trim();
+            const isUrl = /^https?:\/\//i.test(trimmed);
+
+            if (isUrl) {
+                return createLinkButton(trimmed, "Podcast 🎙️", "btn-link-podcast");
+            } else {
+                return `<span class="tag-podcast-text">🎙️ ${escapeHTML(trimmed)}</span>`;
+            }
+        }
+
+        function getTypeTag(type) {
+            const typeText = String(type || "").toLowerCase();
+
+            if (typeText === "book") return `<span class="tag tag-book">📖 書籍</span>`;
+            if (typeText === "mountant" || typeText === "mountain") return `<span class="tag tag-mountant">⛰️ 山岳</span>`;
+            if (typeText === "wilderness") return `<span class="tag tag-wilderness">🌲 荒野</span>`;
+            if (typeText === "magic") return `<span class="tag tag-magic">🪄 魔法</span>`;
+
+            return `<span class="tag tag-default">${escapeHTML(type || "其他")}</span>`;
+        }
+
+        function renderTable(dataList) {
+            if (!dataList || dataList.length === 0) {
+                dataTable.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="empty">
+                            🍃 目前沒有找到任何旅途紀錄
+                        </td>
+                    </tr>
+                `;
+                dataCount.textContent = "共 0 筆紀錄";
+                return;
+            }
+
+            let html = "";
+            dataList.forEach((item, index) => {
+                // 修正問題2：移除 ID 號碼前的 '#'
+                const id = item.id || (index + 1);
+                const name = escapeHTML(item.name || "未命名紀錄");
+                const typeTag = getTypeTag(item.type);
+                
+                const linkBtn = createLinkButton(item.linkAddress || item.link, "開啟網址 ↗", "btn-link-main");
+                
+                // 修正問題1：Podcast 智慧多型渲染
+                const podcastContent = renderPodcastContent(item.podcast);
+                
+                let remarkText = escapeHTML(item.remark || "-");
+                if (remarkText.includes("寶箱")) {
+                    remarkText += `<span class="tag-mimic">⚠️ 寶箱怪</span>`;
+                }
+
+                html += `
+                    <tr>
+                        <td class="col-id"><strong>${id}</strong></td>
+                        <td class="col-name">${name}</td>
+                        <td class="col-type">${typeTag}</td>
+                        <td class="col-link">${linkBtn || "-"}</td>
+                        <td class="col-podcast">${podcastContent}</td>
+                        <td class="col-remark">${remarkText}</td>
+                    </tr>
+                `;
+            });
+
+            dataTable.innerHTML = html;
+            dataCount.textContent = `共 ${dataList.length} 筆旅途文獻`;
+        }
+
+        async function fetchData() {
+            dataTable.innerHTML = `
+                <tr>
+                    <td colspan="6" class="loading">
+                        正在施展讀取魔法...
+                    </td>
+                </tr>
+            `;
+            dataCount.textContent = "讀取中...";
+
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error("讀取失敗");
+                
+                const result = await response.json();
+                allData = Array.isArray(result) ? result : (result.data || []);
+                renderTable(allData);
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                dataTable.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="empty" style="color:#DC2626;">
+                            ⚠️ 魔導書讀取失敗，請檢查 API 連線。
+                        </td>
+                    </tr>
+                `;
+                dataCount.textContent = "連線失敗";
+            }
+        }
+
+        function handleSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            if (!query) {
+                renderTable(allData);
+                return;
+            }
+
+            const filtered = allData.filter(item => {
+                const name = String(item.name || "").toLowerCase();
+                const type = String(item.type || "").toLowerCase();
+                const podcast = String(item.podcast || "").toLowerCase();
+                const remark = String(item.remark || "").toLowerCase();
+                return name.includes(query) || type.includes(query) || podcast.includes(query) || remark.includes(query);
+            });
+
+            renderTable(filtered);
+        }
+
+        dataForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const payload = {
+                name: document.getElementById("name").value.trim(),
+                linkAddress: document.getElementById("linkAddress").value.trim(),
+                type: document.getElementById("type").value,
+                podcast: document.getElementById("podcast").value.trim(),
+                remark: document.getElementById("remark").value.trim()
+            };
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "✦ 魔法傳送中...";
+
+            try {
+                await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload)
+                });
+
+                showToast("🪄 記憶已成功刻入魔導書！");
+                dataForm.reset();
+                await fetchData();
+            } catch (error) {
+                console.error("Submit Error:", error);
+                showToast("⚠️ 吟唱中斷，請重試");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "✦ 記錄至魔導書";
+            }
+        });
+
+        searchBtn.addEventListener("click", handleSearch);
+        searchInput.addEventListener("keyup", (e) => {
+            if (e.key === "Enter") handleSearch();
+        });
+        refreshBtn.addEventListener("click", () => {
+            searchInput.value = "";
+            fetchData();
+        });
+
+        document.addEventListener("DOMContentLoaded", fetchData);
+    </script>
+</body>
+
+</html>

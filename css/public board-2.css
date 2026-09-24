@@ -1,0 +1,251 @@
+/* =========================
+           全域變數與設定
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--dark-green);
+}
+
+/* =========================
+           網頁整體外框
+========================= */
+.wrapper {
+    width: 1024px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    
+    background: var(--forest-green);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.logo {
+    width: 1024px;
+    height: 420px;
+    background-color: var(--forest-green);
+    background-image: url(../image/mount-1.avif);
+    background-position: center center;
+    background-size: cover;
+    font-size: 1.5rem;
+    display: flex;
+
+
+}
+
+/* =========================
+           Banner 橫幅 header
+========================= */
+.banner {
+    position: relative;
+    height: 420px;
+    overflow: hidden;
+    background: var(--forest-green);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 40px;
+}
+
+.banner img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.75;
+    z-index: 1;
+    transition: var(--transition-smooth);
+}
+
+
+/* =========================導覽列========================== */
+nav {
+    background-color: var(--light-green);
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    float: left;
+    list-style-type: none;
+}
+
+nav ul li a {
+    display: block;
+    padding: 16px 20px;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: var(--transition-smooth);
+    border-bottom: 3px solid transparent;
+
+}
+
+nav ul li a:hover {
+    box-shadow: 2px 2px 2px 2px var(--brown);
+}
+
+/* =========================
+           主要內容區塊
+========================= */
+.content {
+    background-color: rgb(--light-green);
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.content h1 {
+    text-align: center;
+    font-style: 48px;
+    color: var(--brown);
+    margin-bottom: 20px;
+}
+
+.content .box01 {
+    width: 49%;
+    height: 160px;
+    background-color: var(--bg-logo);
+    background-image: url(../image/mount-4.avif);
+    background-position: center center;
+    background-size: cover;
+    float: left;
+}
+
+.content .box02 {
+    width: 49%;
+    height: 160px;
+    background-color: var(--bg-logo);
+    background-image: url(../image/mount-5.avif);
+    background-position: center center;
+    background-size: cover;
+    float: left;
+}
+
+
+
+.content a {
+    display: block;
+    background-color: rgb(113, 113, 136);
+    width: 120px;
+    height: 40px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+    color: aliceblue;
+    font-weight: bold;
+}
+
+.dropdown-item {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* =========================
+           Footer 頁尾
+ ========================= */
+footer {
+    padding: 30px;
+    text-align: center;
+    background: var(--dark-green);
+    color: #dbe4d9;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+
+ /* RWD指令 */
+@media screen and (max-width: 1024px) {
+    .wrapper {
+        width: 95%;
+    }
+
+    .banner .logo {
+        width: 100%;
+        height: 420px;
+        
+        background-image: url(../image/mount-1.avif);
+    }
+}
+
+@media screen and (max-width: 768px) {
+     .wrapper {
+        width: 100%;
+    }
+    .banner .logo {
+        
+        width: 100%;
+        height: 420px;
+        
+        background-image: url(../image/mount-1.avif);
+    }
+
+        nav ul {
+            display: block;
+        }
+
+        nav ul li {
+            float: none;
+            margin-bottom: 5px;
+        }
+
+        nav ul li a {
+            display: block;          
+            margin-right: 0px;
+            ;
+        }
+
+        .content .box01 {
+            width: 100%;
+            height: 160px;
+            background-color: var(--bg-logo);
+            background-image: url(../image/mount-1.avif);
+            background-position: center center;
+            background-size: cover;
+            float: left;
+        }
+
+        .content .box02 {
+            width: 100%;
+            height: 160px;
+            background-color: var(--bg-logo);
+            background-image: url(../image/mount-1.avif);
+            background-position: center center;
+            background-size: cover;
+            float: left;
+        }
+
+
+
+    }
