@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>薔薇之戀</title>
+    <style>
+        /* ==================================================
+           CSS：全域設定
+           ================================================== */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            background-color: #eeeeee;
+            font-family:
+                "Microsoft JhengHei",
+                "Noto Sans TC",
+                sans-serif;
+
+            color: #333333;
+        }
+
+
+        /* ==================================================
+           CSS：主要內容
+           ================================================== */
+
+        .page {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #d99b9d;
+            padding: 35px;
+        }
+        /* ==================================================
+           CSS：標題區
+           ================================================== */
+        .hero {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 35px;
+        }
+
+        .hero-title {
+            width: 180px;
+            flex-shrink: 0;
+        }
+        .hero-title h1 {
+            margin: 0;
+            color: #a00000;
+            font-size: 48px;
+            line-height: 1.1;
+            writing-mode: vertical-rl;
+            letter-spacing: 8px;
+        }
+        .hero-text {
+            flex: 1;
+            font-size: 30px;
+            line-height: 2;
+            padding-top: 5px;
+        }
+        /* ==================================================
+           CSS：第一張圖片
+           ================================================== */
+        .book-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .book-image {
+            width: 100%;
+            display: block;
+            border-radius: 4px;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+        }
+        .book-text {
+            font-size:30px;
+            line-height: 2;
+            background-color: rgba(255, 255, 255, 0.25);
+            padding: 25px;
+        }
+        /* ==================================================
+           CSS：漫畫區
+           ================================================== */
+
+        .comic-section {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        .comic-image {
+            width: 100%;
+            display: block;
+            box-shadow:
+                0 5px 12px rgba(0, 0, 0, 0.2);
+        }
+        .comic-text {
+            font-size:30px;
+            line-height: 2;
+           color: #b00000;
+        }
+       
+        /* ==================================================
+           CSS：補充說明
+           ================================================== */
+        .extra-content {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.35);
+           line-height: 1.8;
+        }
+        .hidden {
+            display: none;
+        }
+        /* ==================================================
+           CSS：手機版 RWD
+           ================================================== */
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+            .page {
+                padding: 20px;
+            }
+            .hero {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+            .hero-title {
+                width: 100%;
+            }
+            .hero-title h1 {
+                writing-mode: horizontal-tb;
+
+                font-size: 38px;
+
+                letter-spacing: 5px;
+            }
+            .hero-text {
+                font-size: 16px;
+            }
+            .book-section {
+                grid-template-columns: 1fr;
+            }
+            .comic-section {
+                grid-template-columns: 1fr;
+            }
+            .book-text,
+            .comic-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+        <section class="hero">
+            <div class="hero-title">
+                <h1> 薔薇之戀 </h1>
+            </div>
+            <div class="hero-text">
+                <p>
+                這種事我也沒有辦法!我也希望長得好看一點呀
+                    <br>
+                    我從生下來，就一直想要我沒有的東西,所以才會變得這麼自卑。
+                    <br>
+                    在花蕾中,生命的氣息...每朶花中,蘊藏了全部的花瓣...不管是什麼樣的花!"
+                </p>
+            </div>
+        </section>
+
+        <section class="book-section">
+            <div>
+                <img class="book-image" src="./img/1.jpg" alt="薔薇之戀書籍">
+            </div>
+        </section>
+
+
+
+        <!-- ==================================================
+             HTML：漫畫圖片區
+             ================================================== -->
+
+        <section class="comic-section">
+
+            <div class="comic-text" >
+                <img class="comic-image" src="./img/3.jpg" alt="薔薇之戀漫畫">
+                <p> 還好你現在還不覺得他好， 不然你的人的生就太悲慘了。 </p>
+                <p>這家人，他們總把心裏所想的直接表逹出來。就算有任何誤解,都能夠立刻化解。就和薔薇一樣---我們可以...很清楚一眼就看見它的刺。</p>
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ==================================================
+         JavaScript
+         ================================================== -->
+
+    <script>
+
+
+        // ==================================================
+        // JS：取得 HTML 元素
+        // ==================================================
+
+        const toggleButton =
+            document.querySelector("#toggleButton");
+
+
+        const extraContent =
+            document.querySelector("#extraContent");
+
+
+
+        // ==================================================
+        // JS：按鈕事件
+        // ==================================================
+
+        toggleButton.addEventListener(
+            "click",
+            function () {
+
+                extraContent.classList.toggle("hidden");
+
+
+                if (
+                    extraContent.classList.contains("hidden")
+                ) {
+
+                    toggleButton.textContent =
+                        "顯示閱讀心得";
+
+                } else {
+
+                    toggleButton.textContent =
+                        "隱藏閱讀心得";
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
